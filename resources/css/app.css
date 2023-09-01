@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#circle-counter {
+    width: 100px;
+    height: 100px;
+  
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 50%;
+    border: 5px solid #06b;
+  }
+  
+  #circle-counter::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 50%;
+    background: #eee;
+    
+    box-sizing: border-box;
+    stroke: #06b;
+    stroke-width: 5px;
+    stroke-dasharray: 314px;
+    stroke-dashoffset: 314px;  
+  }
