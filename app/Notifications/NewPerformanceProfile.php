@@ -28,7 +28,9 @@ class NewPerformanceProfile extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return [
+            // 'mail', 
+            'database'];
     }
 
     /**
@@ -52,8 +54,10 @@ class NewPerformanceProfile extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        $message = "New Performance Profile from {$this->performanceProfileTemplate->user->name}";
+
         return [
-            //
+            'data' => $message,
         ];
     }
 }

@@ -30,7 +30,10 @@ class MissingPerformanceProfile extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', DatabaseChannel::class];
+        return [
+            // 'mail', 
+            DatabaseChannel::class
+        ];
     }
 
     /**
