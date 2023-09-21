@@ -17,8 +17,8 @@
 
         
         @foreach ($clients as $client)
-        <div class="rounded" onclick="toggleContent('content{{ $loop->iteration }}', this)">
-            <div class="bg-gray-100 p-4 mt-4 text-black toggle-bg drop-shadow-md">
+            <div class="rounded" onclick="toggleContent('content{{ $loop->iteration }}', this, event)">
+                <div class="bg-gray-100 p-4 mt-4 text-black toggle-bg drop-shadow-md">
                     <div class="flex justify-between items-center cursor-pointer">
                         <div>
                             <h3 class="text-lg font-semibold mb-0">{{ $client->name }}</h3>
@@ -55,29 +55,31 @@
                     </div>
                     
                 </div>
-                
+                    
                 <div id="content{{ $loop->iteration }}" class="hidden p-8 bg-gray-200 mx-2">
                     <div class="grid grid-cols-3 gap-4">
                         @foreach ($client->performanceProfile as $performanceProfile) 
                             <div class="p-6 bg-white rounded shadow mb-4 flex justify-between">
-                                <div>
-                                    <h3 class="font-semibold text-base">Session {{ $performanceProfile->session }}</h3>
-                                    <div class="">
-                                        <h2 class="text-sm mb-1"> <span class="font-semibold">Submission Date: </span>{{ $performanceProfile->created_at->format('d/m/Y') }}</h2>
-                                        <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ $performanceProfile->completed == false ? 'Incomplete' : 'Complete' }}</h2>
+                                <a href="{{ route('performance-profiles.show', $performanceProfile) }}">
+                                    <div>
+                                        <h3 class="font-semibold text-base">Session {{ $performanceProfile->session }}</h3>
+                                        <div class="">
+                                            <h2 class="text-sm mb-1"> <span class="font-semibold">Submission Date: </span>{{ $performanceProfile->created_at->format('d/m/Y') }}</h2>
+                                            <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ $performanceProfile->completed == false ? 'Incomplete' : 'Complete' }}</h2>
 
-                                        @if ($performanceProfile->practitioner_feedback != null)
-                                            <div class="mt-4">
-                                                <h2 class="text-base mb-1"> <span class="font-semibold">Practitioner Feedback: </span>{{ $performanceProfile->practitioner->name }}</h2>
-                                                <div >
-                                                    <p class="text-slate-500">
-                                                        {{ $performanceProfile->practitioner_feedback }}
-                                                    </p>
+                                            @if ($performanceProfile->practitioner_feedback != null)
+                                                <div class="mt-4">
+                                                    <h2 class="text-base mb-1"> <span class="font-semibold">Practitioner Feedback: </span>{{ $performanceProfile->practitioner->name }}</h2>
+                                                    <div >
+                                                        <p class="text-slate-500">
+                                                            {{ $performanceProfile->practitioner_feedback }}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endif
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>  
                     @endforeach
                     </div>
@@ -91,28 +93,33 @@
    
     <script>
         function toggleContent(contentId, elem) {
-        const content = document.getElementById(contentId);
-        
-        content.classList.toggle('hidden');
+            const content = document.getElementById(contentId);
+            const toggleBg = elem.querySelector('.toggle-bg');
 
-        const toggleBg = elem.querySelector('.toggle-bg');
-        const dorpdownCol = elem.querySelector('.dropdown');
-        if (toggleBg.classList.contains('bg-primary')) {
-            toggleBg.classList.remove('bg-primary');
-            toggleBg.classList.remove('text-white');
-            dorpdownCol.classList.remove('text-white');
-            toggleBg.classList.add('bg-gray-100');
-            toggleBg.classList.add('text-black');
-            dorpdownCol.classList.add('text-black');
-        } else {
-            toggleBg.classList.remove('bg-gray-100');
-            toggleBg.classList.remove('text-black')
-            dorpdownCol.classList.remove('text-black');
-            toggleBg.classList.add('bg-primary');
-            toggleBg.classList.add('text-white');
-            dorpdownCol.classList.add('text-white');
+             // Check if the click is inside the content div itself or is the toggle-bg div
+            if (event.target.closest(`#content${contentId}`) || !event.target.closest('.toggle-bg')) {
+                return; // do nothing if click is inside the content or outside the toggle-bg
+            }
+            
+            content.classList.toggle('hidden');
+
+            const dorpdownCol = elem.querySelector('.dropdown');
+            if (toggleBg.classList.contains('bg-primary')) {
+                toggleBg.classList.remove('bg-primary');
+                toggleBg.classList.remove('text-white');
+                dorpdownCol.classList.remove('text-white');
+                toggleBg.classList.add('bg-gray-100');
+                toggleBg.classList.add('text-black');
+                dorpdownCol.classList.add('text-black');
+            } else {
+                toggleBg.classList.remove('bg-gray-100');
+                toggleBg.classList.remove('text-black')
+                dorpdownCol.classList.remove('text-black');
+                toggleBg.classList.add('bg-primary');
+                toggleBg.classList.add('text-white');
+                dorpdownCol.classList.add('text-white');
+            }
         }
-    }
 
     </script>
 @endsection

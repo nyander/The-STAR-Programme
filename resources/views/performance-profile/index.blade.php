@@ -46,61 +46,38 @@
                         <p><span class="font-bold">Client Name</span></p> <p>{{ $clientAgreement->user->name }}</p>
                         <p><span class="font-bold">Sessions</span></p> <p>{{ $performanceProfiles->count() }}/{{ $clientAgreement->program_duration }} Complete</p>
                         @if ($clientOverview->current_sport != null)
-                        <p><span class="font-bold">Current Sport</span></p> <p>{{$clientOverview->current_sport}}</p>                            
+                        <p><span class="font-bold">Sport</span></p> <p>{{$clientOverview->current_sport}}</p>                            
                         @endif
                     </div>
-
-                    <p>
-                        
-                    </p>
                     
                 @endif
         
         
                 <div class="grid lg:grid-cols-2 gap-4">
-                    @foreach ($performanceProfiles as $performanceProfile) 
-                            <div class="p-6 bg-white rounded shadow flex justify-between">
-                                <div>
-                                    <h3 class="font-semibold text-lg">Session {{ $performanceProfile->session }}</h3>
-                                    <div class="">
-                                        <h2 class="text-sm mb-1"> <span class="font-semibold">Submission Date: </span>{{ $performanceProfile->created_at->format('d/m/Y') }}</h2>
-                                        @if (Auth::user()->hasRole('Admin'))
-                                            <h2 class="text-sm mb-1"> <span class="font-semibold">Client: </span>{{ $performanceProfile->client->name }}</h2>
-                                        @endif
-                                        <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ $performanceProfile->completed == false ? 'Incomplete' : 'Complete' }}</h2>
-                                        
-                                        @if ($performanceProfile->practitioner_feedback != null)
-                                            <div class="mt-4">
-                                                <h2 class="text-base mb-1"> <span class="font-semibold">Practitioner Feedback: </span>{{ $performanceProfile->practitioner->name }}</h2>
-                                                <div >
-                                                    <p class="text-slate-500">
-                                                        {{ $performanceProfile->practitioner_feedback }}
-                                                    </p>
-                                                </div>
+                    @foreach ($performanceProfiles as $performanceProfile)
+                        <a href="{{ route('performance-profiles.show', $performanceProfile) }}">
+                            <div class="p-6 bg-white rounded shadow">
+                                <h3 class="font-semibold text-lg">Session {{ $performanceProfile->session }}</h3>
+                                <div class="">
+                                    <h2 class="text-sm mb-1"> <span class="font-semibold">Submission Date: </span>{{ $performanceProfile->created_at->format('d/m/Y') }}</h2>
+                                    @if (Auth::user()->hasRole('Admin'))
+                                        <h2 class="text-sm mb-1"> <span class="font-semibold">Client: </span>{{ $performanceProfile->client->name }}</h2>
+                                    @endif
+                                    <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ $performanceProfile->completed == false ? 'Incomplete' : 'Complete' }}</h2>
+                                    
+                                    @if ($performanceProfile->practitioner_feedback != null)
+                                        <div class="mt-4">
+                                            <h2 class="text-base mb-1"> <span class="font-semibold">Practitioner Feedback: </span>{{ $performanceProfile->practitioner->name }}</h2>
+                                            <div >
+                                                <p class="text-slate-500">
+                                                    {{ $performanceProfile->practitioner_feedback }}
+                                                </p>
                                             </div>
-                                        @endif
-                                    </div>
+                                        </div>
+                                    @endif
                                 </div>
-                                <x-dropdown>
-                                    <x-slot name="trigger">
-                                        <button>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            </svg>
-                                        </button>
-                                    </x-slot>
-                                    <x-slot name="content">
-                                        <x-dropdown-link :href="route('performance-profiles.show', $performanceProfile)">
-                                            @if ($user->hasRole('Client') || ($user->hasRole('Admin') && $performanceProfile->practitioner_feedback != null))
-                                                    {{ __('Show') }}
-                                            @elseif ($user->hasRole('Admin') && $performanceProfile->practitioner_feedback == null)
-                                                    {{ __('Show and Provide Feedback') }}
-                                            @endif
-                                        </x-dropdown-link>
-                                    </x-slot>
-                                </x-dropdown>
-                                
                             </div>  
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -108,7 +85,7 @@
             <div class="w-5/12 bg-sky-50 pl-4 p-4 m-4 border-l-8 border-yellow-300 rounded">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-semibold mb-0">Goals</h2>
-                    @if (!Auth::user()->hasRole('Admin'))
+                    @if (Auth::user()->hasRole('Admin'))
                         <a href="{{ route('goals.create', $user) }}" class="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 rounded text-base">Add New Goal</a>
                     @endif
                 </div> 

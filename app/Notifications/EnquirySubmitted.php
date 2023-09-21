@@ -42,11 +42,11 @@ class EnquirySubmitted extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject('STAR Program: '.$this->client->name.' has Submitted a new Enquiry')
+        ->subject('AthleteRise by Star Mentality: '.$this->client->name.' has Submitted a new Enquiry')
         ->greeting('Hi, this is an email to inform you that '.$this->client->name.' has submitted a new enquiry:')
         ->line('Enquiry: '.$this->enquiry->content)
-        ->line('Please head to the Consultation page to review the enquiry\'s enquiry.')
-        ->action('Go to STAR Program', url('/enquiries'));
+        ->line('Please head to the Message Board page to review the enquiry\'s enquiry.')
+        ->action('Go to AthleteRise by Star Mentality', url('/enquiries'));
     }
 
     /**
@@ -57,7 +57,7 @@ class EnquirySubmitted extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'data' => $this->client->name.' has submitted an Enquiry. Please head to consultation section'
+            'data' => $this->client->name.' has submitted an Enquiry. Please head to Message Board section'
         ];
     }
 }

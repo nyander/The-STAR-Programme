@@ -38,7 +38,7 @@ class FillPerformanceProfile extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject('STAR Program: Submit your Performance Profile')
+        ->subject('AthleteRise by Star Mentality: Submit your Performance Profile')
         ->greeting("Hi, today is the day where you can complete your Performance Profile for the week.")
         ->action('Go to the S.T.A.R Program App', url('/performance-profiles/create'))
         ->line('Thank you!');

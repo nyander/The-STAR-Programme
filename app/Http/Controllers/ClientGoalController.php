@@ -45,7 +45,7 @@ class ClientGoalController extends Controller
      */
     public function create(User $client)
     {
-        if (Auth::user()->hasRole('Client')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('client-goals.create', compact('client'));
         } else {
             return redirect()->back()->with('error', 'Only a Client can create goals');

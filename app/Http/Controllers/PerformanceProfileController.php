@@ -175,6 +175,7 @@ class PerformanceProfileController extends Controller
         $performanceProfile->strengths = $validated['strengths'];
         $performanceProfile->weakness = $validated['weakness'];
         $performanceProfile->practitioner_id = Auth::user()->id;
+        $performanceProfile->completed = true;
         $performanceProfile->save();
 
         $performanceProfile->client->notify(new FeedbackSubmitted($performanceProfile));

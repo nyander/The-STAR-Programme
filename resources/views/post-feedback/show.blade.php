@@ -86,7 +86,7 @@
 
                 <div class="practitioner-feedback rounded mb-4">
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
-                        <label for="">Did the client achieve their initial consultation goals?</label>
+                        <label for="">Did the client achieve their initial Message Board goals?</label>
                         <textarea name="practitioner_client_achieve" id="practitioner_client_achieve" 
                         class="block mt-1 w-full rounded-md  p-2 border-gray-300 bg-gray-50"
                         disabled>{{ $feedback->practitioner_client_achieve }}</textarea>

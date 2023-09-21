@@ -185,9 +185,9 @@
                 <div class="sports-background p-6 bg-white rounded shadow mb-4">
                     <h4 class="font-semibold text-base mb-4">Sport and Background Information</h4>
 
-                    {{-- Current Sport --}}
+                    {{-- Sport --}}
                     <div>
-                        <x-input-label for="current_sport" :value="__('Current Sport')" />
+                        <x-input-label for="current_sport" :value="__('Sport')" />
                         <x-text-input id="current_sport" class="block mt-1 w-full" type="text" name="current_sport" :value="old('current_sport')"  />
                         <x-input-error :messages="$errors->get('current_sport')" class="mt-2" />
                     </div>

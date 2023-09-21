@@ -20,7 +20,6 @@ class EnquiryResponseSubmitted extends Notification
         
         $this->response = $responsedetails;
         $this->client = $this->response->user;
-        // dd($this->client);
     }
 
     /**
@@ -40,14 +39,13 @@ class EnquiryResponseSubmitted extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        // dd($this->client);
         return (new MailMessage)
-            ->subject('STAR Program: '.$this->client->name.' has responded to an Enquiry')
+            ->subject('AthleteRise by Star Mentality: '.$this->client->name.' has responded to an Enquiry')
             ->greeting('Hi, this is an email to inform you that '.$this->client->name.' has responded to the Enquiry '.$this->response->enquiry->subject.':')
             ->line('Enquiry: '.$this->response->enquiry->subject)
             ->line('Response: '.$this->response->response)
-            ->line('Please head to the Consultation page to review the response\'s response.')
-            ->action('Go to STAR Program', url('/enquiries'));
+            ->line('Please head to the Message Board page to review the response\'s response.')
+            ->action('Go to AthleteRise by Star Mentality', url('/enquiries'));
     }
 
     /**

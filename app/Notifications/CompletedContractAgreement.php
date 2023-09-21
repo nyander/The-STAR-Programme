@@ -40,7 +40,7 @@ class CompletedContractAgreement extends Notification
     {
 
         return (new MailMessage)
-            ->subject("STAR Program: {$this->client->name} has Completed Agreed Contract")
+            ->subject("AthleteRise by Star Mentality: {$this->client->name} has Completed Agreed Contract")
             ->greeting("Hi, {$this->client->name} has completed their final performance profile thus completing their Agreed Program Contract")
             ->line("Please head to the client's profile to provide their final performance profile.")
             ->action('Go to the S.T.A.R Program App', url('/'))

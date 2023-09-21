@@ -142,20 +142,14 @@
                     <form method="POST" action="{{ route('performance-profiles.addFeedback', $performanceProfile) }}" class="mt-4">
                         @csrf
                         <div class="text-section mb-4 relative p-8 bg-grey-100 border-t-4 border-primary">
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center justify-between">
                                 <div class="label">
-                                    <h3 class="text-2xl font-semibold mb-4">Practitioner's feedback</h3>
+                                    <h3 class="text-2xl font-semibold">Practitioner's feedback</h3>
                                 </div>
                             </div>
-                            <div class="field border-primary border-4 p-4 bg-white rounded-md">
-                                    <label for="strengths">Practitioner Feedback</label>
-                                    <textarea name="practitioner_feedback" id="practitioner_feedback"
-                                        placeholder="Please provide feedback"
-                                        class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                    ></textarea>
-                            </div>
+                            
 
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-4 mb-8">
                                 <div class="field">
                                     <div class="border-green-600 border-4 p-4 bg-white rounded-md mt-8">
                                         <label for="strengths">Main Strengths</label>
@@ -175,6 +169,14 @@
                                         ></textarea>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="field border-primary border-4 p-4 bg-white rounded-md">
+                                <label for="strengths">Practitioner Feedback</label>
+                                <textarea name="practitioner_feedback" id="practitioner_feedback"
+                                    placeholder="Please provide feedback"
+                                    class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                ></textarea>
                             </div>
 
                             <x-primary-button class="bg-primary mt-8">{{ __('Submit Feedback') }}</x-primary-button>
@@ -200,7 +202,7 @@
                                     </div>
 
                                     <p class="py-2">
-                                        Hello {{ $performanceProfile->practitioner_feedback }}
+                                        {{ $performanceProfile->practitioner_feedback }}
                                     </p>
                                 </div>
 
@@ -213,7 +215,7 @@
                                         </div>
     
                                         <p class="py-2">
-                                            Hello {{ $performanceProfile->strengths }}
+                                            {{ $performanceProfile->strengths }}
                                         </p>
                                     </div>
 
@@ -224,7 +226,7 @@
                                         </div>
     
                                         <p class="py-2">
-                                            Hello {{ $performanceProfile->weakness }}
+                                            {{ $performanceProfile->weakness }}
                                         </p>
                                     </div>
     

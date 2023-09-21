@@ -68,7 +68,7 @@ class ClientEnquiryController extends Controller
         } 
 
 
-        return redirect()->route('enquiries.show', $enquiry)
+        return redirect()->route('enquiries.index')
             ->with('success', 'Enquiry submitted successfully.');
             
     }
@@ -89,7 +89,6 @@ class ClientEnquiryController extends Controller
 
     public function update(Request $request, ClientEnquiry $enquiry)
     {
-        dd('HERE I AM!');
         if(Auth::user()->hasRole('Client') && Auth::user()->clientAgreement->complete == true){
             return back()->with('error', 'As your contract is complete, you cannot access this page.');
         }
@@ -110,7 +109,6 @@ class ClientEnquiryController extends Controller
 
     public function addClientReply(Request $request, ClientEnquiry $enquiry)
     {
-        dd('I AM addClientReply');
         if(Auth::user()->hasRole('Client') && Auth::user()->clientAgreement->complete == true){
             return back()->with('error', 'As your contract is complete, you cannot access this page.');
         }
@@ -147,13 +145,12 @@ class ClientEnquiryController extends Controller
         if (Auth::user()->hasRole('Client')){
             $practitioners = User::role('Admin')->get();
             foreach($practitioners as $practitioner){
-                $practitioner->notify(new EnquiryResponseSubmitted($response));
+                // $practitioner->notify(new EnquiryResponseSubmitted($response));
             } 
             //if current user is the user that submitted the response then notify the practitioners
         } else {
             $user = $enquiry->client();
-            dd($response);
-            $user->notify(new EnquiryResponseSubmitted($response));
+            // $user->notify(new EnquiryResponseSubmitted($response));
             
         }
 

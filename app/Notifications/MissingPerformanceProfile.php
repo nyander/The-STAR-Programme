@@ -47,7 +47,7 @@ class MissingPerformanceProfile extends Notification
         })->implode("\n");
 
         return (new MailMessage)
-            ->subject('STAR Program: Clients missing Performance Profiles')
+            ->subject('AthleteRise by Star Mentality: Clients missing Performance Profiles')
             ->greeting("Hi, there are {$clientCount} clients who have not submitted Performance Profiles for over 7 days.")
             ->line("Please get in touch with the following clients:")
             ->line($clientNames)

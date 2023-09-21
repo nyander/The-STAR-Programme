@@ -85,14 +85,14 @@
                                         <h3 class="title text-4xl font-extrabold">
                                             07
                                         </h3>
-                                        <p class="text-xs">Consultation topics</p>
+                                        <p class="text-xs">Message Board topics</p>
                                     </div>
                                 </div>
                               
                               </div>
                         </div>
                     </div>
-                    <p>Consultation section</p>
+                    <p>Message Board section</p>
                 </div>
 
                 

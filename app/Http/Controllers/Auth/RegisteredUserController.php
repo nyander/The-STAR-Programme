@@ -60,7 +60,6 @@ class RegisteredUserController extends Controller
 
     public function createClient()
     {
-        // dd(Auth::user()->permissions->pluck('name'));
         $performanceProfiles = PerformanceProfileTemplate::pluck('title', 'id');
         
         $file = File::where('type', 'terms')->first();

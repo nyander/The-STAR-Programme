@@ -55,10 +55,12 @@ class PerformanceProfileRadarChart
 
 
         $radarChart = $this->chart->radarChart()
-            ->setTitle('Individual Player Stats.')
-            ->setSubtitle('Season 2021.')
+            ->setTitle('Average Answers Per Session.')
             ->setXAxis($categories)
             ->setMarkers(['#303F9F'], 7, 10);
+
+            
+
 
         foreach ($sessionData as $session => $questionCategory) {
             $data = [];
