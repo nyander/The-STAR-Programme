@@ -21,7 +21,7 @@
                     {{-- @if (Auth::user()->hasRole('Client')) --}}
                     @can('performance-profile-list')
                         <x-nav-link :href="route('performance-profiles.index')" :active="request()->routeIs('performance-profiles.index')">
-                            {{ __('Performance Profiles') }}
+                            {{ __('My Performance Ratings') }}
                         </x-nav-link>
                     @endcan
                         
@@ -210,7 +210,7 @@
             <div class="pt-2 pb-3 space-y-1">
                 @can('performance-profile-list')
                     <x-responsive-nav-link :href="route('performance-profiles.index')" :active="request()->routeIs('performance-profiles.index')">
-                        {{ __('Performance Profiles') }}
+                        {{ __('My Performance Ratings') }}
                     </x-responsive-nav-link>
                 @endcan
             </div>
@@ -218,7 +218,7 @@
             <div class="pt-2 pb-3 space-y-1">
                 @can('client-overview-access')
                     <x-responsive-nav-link :href="route('users.clients')" :active="request()->routeIs('users.clients')">
-                        {{ __('Client Overview') }}
+                        {{ __('My Overview') }}
                     </x-responsive-nav-link>
                 @endcan
             </div>
