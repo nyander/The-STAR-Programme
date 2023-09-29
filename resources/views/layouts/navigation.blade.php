@@ -12,11 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 md:-my-px md:ml-10 md:flex">
-                
-
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
 
                     {{-- @if (Auth::user()->hasRole('Client')) --}}
                     @can('performance-profile-list')
@@ -37,7 +32,7 @@
                     {{-- @endif --}}
                     @can('client-enquiry-access')
                         <x-nav-link :href="route('enquiries.index')" :active="request()->routeIs('enquiries.index')">
-                            {{ __('Message Board') }}
+                            {{ __('Enuquiry board') }}
                         </x-nav-link>
                     @endcan
                 </div>
@@ -226,7 +221,7 @@
             <div class="pt-2 pb-3 space-y-1">
                 @can('client-enquiry-access')
                     <x-responsive-nav-link :href="route('enquiries.index')" :active="request()->routeIs('enquiries.index')">
-                        {{ __('Message Board') }}
+                        {{ __('Enuquiry board') }}
                     </x-responsive-nav-link>
                 @endcan
             </div>

@@ -50,12 +50,15 @@ class PerformanceTemplateQuestionController extends Controller
             'type' => 'required|in:text,textarea,select,radio',
             'options' => 'nullable|string',
             'required' => 'required|boolean',
+            'categorytype' => 'required',
             'order' => [
                 'nullable',
                 'integer',
                 Rule::unique('performance_template_questions')->where('performance_template_id', $performanceProfileTemplate->id),
             ],
         ]);
+
+        
 
         $validatedData['title'] = str_replace(' ', '', $validatedData['title']);
 
@@ -81,7 +84,8 @@ class PerformanceTemplateQuestionController extends Controller
             $validatedData['options'] = null;
         }
 
-        $performanceProfileTemplate->questions()->create($validatedData);
+        $question = $performanceProfileTemplate->questions()->create($validatedData);
+
 
         return redirect()->route('performance-profile-templates.questions.index', $performanceProfileTemplate)->with('success', 'Question created successfully.');
     }

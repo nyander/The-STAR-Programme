@@ -22,25 +22,28 @@
 
             </div>
         
-            <div class="p-6 bg-white rounded border-primary border-4">
-                <h2 class="text-2xl font-semibold mb-4">Create New Enquiry</h2>
-                
-                <form action="{{ route('enquiries.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-bold uppercase ">Topic:</label>
-                        <input type="text" name="subject" class="mt-1 w-full border rounded-lg bg-gray-100 border-none p-4" placeholder="Please enter here" required>
-    
-                    </div>
+            @if (Auth::user()->hasRole('Client'))
+                <div class="p-6 bg-white rounded border-primary border-4">
+                    <h2 class="text-2xl font-semibold mb-4">Create New Enquiry</h2>
                     
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-bold uppercase">Quesion/Enquiry:</label>
-                        <textarea name="message" class="mt-1 w-full border rounded-lg bg-gray-100 border-none p-4" placeholder="Please enter here" rows="5" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg">Submit Enquiry</button>
-                </form>
-            </div>
+                    <form action="{{ route('enquiries.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold uppercase ">Topic:</label>
+                            <input type="text" name="subject" class="mt-1 w-full border rounded-lg bg-gray-100 border-none p-4" placeholder="Please enter here" required>
+        
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold uppercase">Quesion/Enquiry:</label>
+                            <textarea name="message" class="mt-1 w-full border rounded-lg bg-gray-100 border-none p-4" placeholder="Please enter here" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg">Submit Enquiry</button>
+                    </form>
+                </div>
+            @endif
+            
     
     
             <div class="mt-16">

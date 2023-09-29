@@ -41,7 +41,7 @@ class PerformanceProfileTemplateSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'title' => 'Instrinsic',
+                'title' => 'Instrinsic Motivation',
                 'performance_template_id' => $performanceProfileTemplate->id,
                 'text' => 'Knowing the internal factors that drive you towards your goals',
                 'type' => 'select',
@@ -91,7 +91,7 @@ class PerformanceProfileTemplateSeeder extends Seeder
                 'order' => 6,
             ],
             [
-                'title' => 'SelfAwareness',
+                'title' => 'Self Awareness',
                 'performance_template_id' => $performanceProfileTemplate->id,
                 'text' => 'Understating your internal state, thoughts & behaviours',
                 'type' => 'select',
@@ -111,7 +111,7 @@ class PerformanceProfileTemplateSeeder extends Seeder
                 'order' => 8,
             ],
             [
-                'title' => 'SocialSupport',
+                'title' => 'Social Support',
                 'performance_template_id' => $performanceProfileTemplate->id,
                 'text' => 'The quality of your relationships within your sporting circle',
                 'type' => 'select',

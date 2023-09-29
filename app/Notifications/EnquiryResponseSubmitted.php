@@ -44,7 +44,7 @@ class EnquiryResponseSubmitted extends Notification
             ->greeting('Hi, this is an email to inform you that '.$this->client->name.' has responded to the Enquiry '.$this->response->enquiry->subject.':')
             ->line('Enquiry: '.$this->response->enquiry->subject)
             ->line('Response: '.$this->response->response)
-            ->line('Please head to the Message Board page to review the response\'s response.')
+            ->line('Please head to the Enuquiry board page to review the response\'s response.')
             ->action('Go to AthleteRise by Star Mentality', url('/enquiries'));
     }
 
@@ -56,7 +56,7 @@ class EnquiryResponseSubmitted extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'data' => $this->client->name .' has responded to the Enquiry '. $this->response->enquiry->subject .'.',
         ];
     }
 }

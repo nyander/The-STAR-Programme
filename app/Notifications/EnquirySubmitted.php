@@ -45,7 +45,7 @@ class EnquirySubmitted extends Notification
         ->subject('AthleteRise by Star Mentality: '.$this->client->name.' has Submitted a new Enquiry')
         ->greeting('Hi, this is an email to inform you that '.$this->client->name.' has submitted a new enquiry:')
         ->line('Enquiry: '.$this->enquiry->content)
-        ->line('Please head to the Message Board page to review the enquiry\'s enquiry.')
+        ->line('Please head to the Enuquiry board page to review the enquiry\'s enquiry.')
         ->action('Go to AthleteRise by Star Mentality', url('/enquiries'));
     }
 
@@ -57,7 +57,7 @@ class EnquirySubmitted extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'data' => $this->client->name.' has submitted an Enquiry. Please head to Message Board section'
+            'data' => $this->client->name.' has submitted an Enquiry. Please head to Enuquiry board section'
         ];
     }
 }

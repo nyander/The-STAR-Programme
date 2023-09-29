@@ -26,6 +26,7 @@
                             <p class="mb-1 text-xs"><span class="font-semibold">Goals Achieved:</span> {{ $count = $client->clientGoals()->where('complete', true)->count(); }}</p>    
                         </div>
                         <div>
+                            
                             <div class="mb-8">
                                 @if (Auth::user()->is(auth()->user()))
                                     <x-dropdown>
@@ -37,12 +38,23 @@
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            <x-dropdown-link :href="route('performance-profiles.index')">
-                                                {{ __('Manage Profile/Goal') }}
-                                            </x-dropdown-link>
-                                            <x-dropdown-link :href="route('users.clientOverview', $client)">
-                                                {{ __('Manage Client') }}
-                                            </x-dropdown-link>
+                                            @if (Auth::user()->hasRole('Client'))
+                                                <x-dropdown-link :href="route('performance-profiles.index')">
+                                                    {{ __('Manage Performance Profile/Goal') }}
+                                                </x-dropdown-link>
+                                                <x-dropdown-link :href="route('users.clientOverview', $client)">
+                                                    {{ __('Manage Profile') }}
+                                                </x-dropdown-link>
+                                            @elseif (Auth::user()->hasRole('Admin'))
+                                                <x-dropdown-link :href="route('performance-profiles.adminIndex', $client)">
+                                                    {{ __('Manage Profile/Goal') }}
+                                                </x-dropdown-link>
+                                                <x-dropdown-link :href="route('users.clientOverview', $client)">
+                                                    {{ __('Manage Client') }}
+                                                </x-dropdown-link>
+                                            @else
+                                            @endif
+                                            
                                         </x-slot>
                                     </x-dropdown>
                                 @endif 

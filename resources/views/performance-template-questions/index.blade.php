@@ -27,7 +27,7 @@
                         <!-- Type Field -->
                         <div class="mt-4">
                             <label for="type" class="block font-medium">Category</label>
-                            <select name="type" id="categorytype" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('type') border-red-500 @enderror" required>
+                            <select name="categorytype" id="categorytype" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('type') border-red-500 @enderror" required>
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -112,9 +112,7 @@
                                         <div class="w-3/6">
                                             <div class="grid grid-cols-2 gap-2">
                                                 <div>
-                                                    @if ($question->order)
-                                                        <span class="text-xs"> <span class="font-semibold">Category:</span> {{ $question->performanceCategory->category }}</span>
-                                                    @endif
+                                                    <span class="text-xs"> <span class="font-semibold">Category:</span> {{ $question->performanceCategory->category }}</span>
                                                 </div>
                                                 <div>
                                                     <span class="text-xs"> <span class="font-semibold">Type:</span> {{ ucfirst($question->type) }}</span>

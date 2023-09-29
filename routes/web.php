@@ -59,6 +59,7 @@ Route::post('/performance-profiles/{performanceProfile}/add-feedback', [Performa
 Route::post('/performance-profiles/search', [PerformanceProfileController::class, 'search'])->name('performance-profiles.search');
 Route::get('/mark-as-read', [PerformanceProfileController::class, 'markAsRead'])->name('mark-as-read');
 Route::get('/clear-read', [PerformanceProfileController::class, 'clearRead'])->name('clear-read');
+Route::get('{user}/performance-profiles-admin', [PerformanceProfileController::class, 'adminIndex'])->middleware(['auth','verified'])->name('performance-profiles.adminIndex');
 Route::get('/read-notification/{notification}', [PerformanceProfileController::class, 'readNotification'])->name('read-notification');
 
 Route::get('enroll-client', [RegisteredUserController::class, 'createClient'])->middleware(['auth', 'permission:enroll-client'])->name('client.create'); 

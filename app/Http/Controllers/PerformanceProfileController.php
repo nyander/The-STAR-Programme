@@ -47,6 +47,14 @@ class PerformanceProfileController extends Controller
         
     }
 
+    public function adminIndex(User $user) {
+        $performanceProfiles = PerformanceProfile::where('client_id',$user->id)->get();
+        $clientAgreement = ClientAgreement::where('user_id', $user->id)->first();
+        $clientOverview = ClientOverview::where('user_id', $user->id)->first();
+        $clientGoals = ClientGoal::where('client_id',$user->id)->get();
+        return view('performance-profile.index', compact('performanceProfiles', 'user', 'clientAgreement', 'clientOverview', 'clientGoals'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -77,21 +85,29 @@ class PerformanceProfileController extends Controller
         $user = Auth::user();
         if($user->performanceProfile->count() < $user->clientAgreement()->first()->program_duration)
         {
+            
             $performanceProfileTemplate = PerformanceProfileTemplate::find($request->performanceProfileTemplate);
             $rules = [];
 
             foreach ($performanceProfileTemplate->questions as $question) {
+                $key = str_replace(' ', '_', $question->title);
                 if ($question->required) {
-                    $rules[$question->title] = 'required';
+                    $rules[$key] = 'required';
                 } else {
-                    $rules[$question->title] = 'nullable';
+                    $rules[$key] = 'nullable';
                 }
             }
 
             $test = [];
+
             $validatedData = $request->validate($rules);
+            
+            
 
             $profileCount = PerformanceProfile::where('client_id', $user->id)->count();
+
+            
+            
 
             $performanceProfile = PerformanceProfile::create([
                 'performance_template_id' => $performanceProfileTemplate->id,
@@ -99,15 +115,23 @@ class PerformanceProfileController extends Controller
                 'session' => $profileCount+1, 
             ]);
 
+            
+
+            
+
             foreach ($performanceProfileTemplate->questions as $question) {
+                $key = str_replace(' ', '_', $question->title);
                 PerformanceProfileAnswer::create([
                     'performance_profile_id' => $performanceProfile->id,
                     'question_id' => $question->id,
                     'question_text' => $question->text,
                     'question_type' => $question->type,
-                    'answers' => $validatedData[$question->title]
+                    'answers' => $validatedData[$key]
                 ]);
+                
             }
+
+            
 
             $performanceProfile->save();
 

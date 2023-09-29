@@ -203,6 +203,7 @@ class ClientGoalController extends Controller
     
         $goal->save();
 
+
         return redirect()->route('users.clientOverview', $goal->client)
         ->with('success','Goal has been updated');
     }

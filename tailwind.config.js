@@ -21,6 +21,13 @@ export default {
       colors: {
         primary: '#144067',
         secondary: '#A99206',
+      },
+
+      maxWidth: {
+        '40vw': '40vw',
+        '30vw': '30vw',
+        '20vw': '20vw',
+        '15vw': '15vw'
       }
 
     }

@@ -52,24 +52,29 @@ class ClientEnquiryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'message' => 'required',
-            'subject' => 'required'
-        ]);
-        $enquiry = ClientEnquiry::create([
-            'client_id' => Auth::user()->id,
-            'content' => $request->input('message'),
-            'subject' => $request->input('subject') 
-        ]);
-
-        $practitioners = User::role('Admin')->get();
-        foreach($practitioners as $practitioner){
-            $practitioner->notify(new EnquirySubmitted($enquiry));
-        } 
-
-
-        return redirect()->route('enquiries.index')
-            ->with('success', 'Enquiry submitted successfully.');
+        if (Auth::user()->hasRole('Client')) {
+            $request->validate([
+                'message' => 'required',
+                'subject' => 'required'
+            ]);
+            $enquiry = ClientEnquiry::create([
+                'client_id' => Auth::user()->id,
+                'content' => $request->input('message'),
+                'subject' => $request->input('subject') 
+            ]);
+    
+            $practitioners = User::role('Admin')->get();
+            foreach($practitioners as $practitioner){
+                $practitioner->notify(new EnquirySubmitted($enquiry));
+            } 
+    
+    
+            return redirect()->route('enquiries.index')
+                ->with('success', 'Enquiry submitted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Only a Client can submit enquiries');
+        }
+       
             
     }
 
@@ -145,12 +150,12 @@ class ClientEnquiryController extends Controller
         if (Auth::user()->hasRole('Client')){
             $practitioners = User::role('Admin')->get();
             foreach($practitioners as $practitioner){
-                // $practitioner->notify(new EnquiryResponseSubmitted($response));
+                $practitioner->notify(new EnquiryResponseSubmitted($response));
             } 
             //if current user is the user that submitted the response then notify the practitioners
         } else {
-            $user = $enquiry->client();
-            // $user->notify(new EnquiryResponseSubmitted($response));
+            $user = $enquiry->client()->first();
+            $user->notify(new EnquiryResponseSubmitted($response));
             
         }
 

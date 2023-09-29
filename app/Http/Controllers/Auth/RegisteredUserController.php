@@ -180,10 +180,6 @@ class RegisteredUserController extends Controller
             ]);
         }
 
-        $client->clientOverview->update([
-            'performanceProfile_id' => $request->performance_profile_template,
-        ]);
-
         return redirect()->route('users.clientOverview', $client)
             ->with('success', 'Client details have been updated successfully');
     }

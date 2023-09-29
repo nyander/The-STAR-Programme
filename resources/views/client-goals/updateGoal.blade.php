@@ -80,7 +80,7 @@
                 <div class="text-section mb-4 relative">
                     <div class="flex items-center justify-between mb-4">
                         <div class="label">
-                            <h3 class="text-base">Amount Achieved</h3>
+                            <h3 class="text-base">Task Achieved</h3>
                         </div>
                     </div>
                     <div class="field">
@@ -88,7 +88,7 @@
                             <div>
                                 <input type="checkbox" name="completed" id="completed"
                                 {{ $goal->complete == true ? 'checked' : '' }}/>
-                                <label for="completed">Scales</label>
+                                <label for="completed">Completed</label>
                               </div>
                           </div>
                       

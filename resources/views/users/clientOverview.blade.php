@@ -1,18 +1,21 @@
 @extends('layouts.standard')
 
 @section('content')
-    @if(session('success'))
-    <div class="p-6 bg-green-100 rounded shadow mb-4">
-        <p class="text-green-600">{{ session('success') }}</p>
-    </div>
-    @endif
-
-    @if(session('error'))
-    <div class="p-6 bg-red-100 rounded shadow mb-4">
-        <p class="text-red-600">{{ session('error') }}</p>
-    </div>
-    @endif
+    
     <div class="mt-6 rounded-lg mx-auto">
+        <div class="mx-auto sm:px-6 px-8 dashboard ">
+            @if(session('success'))
+            <div class="p-6 bg-green-100 rounded shadow mb-4">
+                <p class="text-green-600">{{ session('success') }}</p>
+            </div>
+            @endif
+        
+            @if(session('error'))
+            <div class="p-6 bg-red-100 rounded shadow mb-4">
+                <p class="text-red-600">{{ session('error') }}</p>
+            </div>
+            @endif
+        </div>
         <div class="mx-8 sm:p-8 lg:p-8 bg-white">
             <div class="bg-primary p-4 mt-4 text-white toggle-bg drop-shadow-md rounded">
                 <div class="flex justify-between items-center cursor-pointer">
@@ -85,14 +88,54 @@
                                         <h3 class="title text-4xl font-extrabold">
                                             07
                                         </h3>
-                                        <p class="text-xs">Message Board topics</p>
+                                        <p class="text-xs">Enuquiry board topics</p>
                                     </div>
                                 </div>
                               
                               </div>
                         </div>
                     </div>
-                    <p>Message Board section</p>
+                   <div>
+                    <div class="p-4 sm:col-span-12 md:col-span-6 lg:col-span-5 bg-white h-full my-auto drop-shadow-md rounded">
+                        <div class="flex justify-between items-center">
+                          <h3 class="text-lg font-bold">Enuquiry board</h3>
+                          {{-- <h3 class="text-xs">{{ $enquiriesCount }} Enquiries</h3> --}}
+                        </div>
+                        @forelse ($enquiries as $enquiry)
+                          <div class="bg-gray-50 p-4 border-l-8 border-primary my-4 rounded drop-shadow">
+                            <a href="{{ route('enquiries.show', $enquiry) }}">
+                              <div class="mb-2">
+                                  <div class="w-full flex justify-between items-center">
+                                      <h3 class="text-basexx font-black">{{ $enquiry->subject }}</h3>
+                                      <p class=" text-sm {{ !$enquiry->resolved ? 'text-red-700' : 'text-green-700' }}">{{ !$enquiry->resolved ? 'Unresolved' : 'Resolved' }}</p>
+                                  </div>
+                                  <div class="w-full flex justify-between items-center">
+                                    <p class="text-gray-400 text-sm">{{ $enquiry->client->name }}</p>
+                                    @if ($enquiry->responses->count() > 0)
+                                        <p class="text-xs text-gray-400">{{ $enquiry->responses->count() }} Responses</p>
+                                    @endif
+                                  </div>
+                                  
+                                  
+                                  <p class="">{{ Str::limit($enquiry->content, 6070) }}</p>
+                              </div>
+                            </a>
+                          </div>
+                        @empty
+                          <div class="h-96 flex items-center justify-center mx-auto">
+                            <div class="items-center text-center ">
+                              <p class="mb-6">No Enquries have been made</p>
+                              @can('client-enquiry-access')
+                                <a href="{{ route('enquiries.index') }}" class="bg-primary hover:bg-primary text-white text-sm font-semibold py-2 px-4 rounded">Submit An Enquiry</a>
+                              @endcan
+                            </div>
+                            
+                          </div>
+                            
+                        @endforelse
+                        
+                      </div>
+                   </div>
                 </div>
 
                 
@@ -220,20 +263,6 @@
                                     <x-input-error :messages="$errors->get('program_duration')" class="mt-2" />
                                 </div>
     
-    
-                                 <!-- Performance Profile -->
-                                <div class="mt-4">
-                                    <x-input-label for="performance_profile_template" :value="__('Performance Profile')" />
-                                    <select id="performance_profile_template" name="performance_profile_template"
-                                        class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                    >
-                                        <option value="">Select a performance profile</option>
-                                        @foreach($performanceProfileTemplate as $template)
-                                            <option value="{{ $template->id }}" {{ $client->clientOverview->performanceProfile_id ===  $template->id ? 'selected' : ''}}>{{ $template->title }}</option>
-                                        @endforeach
-                                    </select>
-                                    <x-input-error :messages="$errors->get('performance_profile_template')" class="mt-2" />
-                                </div>
                                 
                             </div>
                             <div class="bg-gray-100 p-4">

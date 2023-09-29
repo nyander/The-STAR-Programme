@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('performance_template_id')->constrained('performance_profile_templates', 'id')->onDelete('cascade');
             $table->text('title');
-            $table->foreignId('performance_categories')->nullable();
+            $table->foreignId('performance_categories');
             $table->text('text');
             $table->string('type');
             $table->json('options')->nullable();

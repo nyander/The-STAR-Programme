@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\PerformanceProfileChart;
-use App\Charts\PerformanceProfileRadarChart;
-use App\Models\ClientGoal;
-use App\Models\PerformanceProfile;
-use App\Models\PerformanceProfileTemplate;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Role;
+use App\Models\ClientGoal;
+use Illuminate\Support\Arr;
 use Termwind\Components\Dd;
+use Illuminate\Http\Request;
+use App\Models\ClientEnquiry;
+use App\Models\PerformanceProfile;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use App\Charts\PerformanceProfileChart;
+use App\Models\PerformanceProfileTemplate;
+use App\Charts\PerformanceProfileRadarChart;
 
 class UserController extends Controller
 {
     function __construct(){
-        $this->middleware('permission:client-overview-access', ['only' => ['clients', 'clientOverview', 'completeContract', 'storeCompleteContract', 'storeAdminCompletion']]);
-        $this->middleware('permission:manage-users', ['only' => ['create', 'store', 'completeContract', 'storeCompleteContract', 'storeAdminCompletion']]);
+        $this->middleware('permission:client-overview-access', ['only' => ['clients','completeContract', 'clientOverview', 'storeAdminCompletion']]);
+        $this->middleware('permission:manage-users', ['only' => ['create', 'store', 'storeAdminCompletion']]);
     }
     /**
      * Display a listing of the resource.
@@ -162,11 +163,34 @@ class UserController extends Controller
     public function clientOverview(User $client, PerformanceProfileChart $linechart, PerformanceProfileRadarChart $radarChart) {
         if (Auth::user()->hasRole('Admin')) {
             $performanceProfileTemplate = PerformanceProfileTemplate::all();
-            return view('users.clientOverview', ['performanceProfileTemplate' => $performanceProfileTemplate,'client' => $client, 'chart' => $linechart->build($client),'radarChart' => $radarChart->build($client)]);
+            $user = auth()->user();
+
+            $enquiries = ClientEnquiry::where('client_id', $client->id)
+                                      ->orderBy('created_at', 'desc')
+                                      ->take(3)
+                                      ->get();
+        
+            return view('users.clientOverview', [
+                'performanceProfileTemplate' => $performanceProfileTemplate,
+                'client' => $client, 
+                'chart' => $linechart->build($client),
+                'radarChart' => $radarChart->build($client),
+                'enquiries' => $enquiries,
+            ]);
         } else if (Auth::user()->hasRole('Client')) {
                 $performanceProfileTemplate = PerformanceProfileTemplate::all();
                 $client = User::where('id', Auth::user()->id)->first();
-                return view('users.clientOverview', ['performanceProfileTemplate' => $performanceProfileTemplate,'client' => $client, 'chart' => $linechart->build($client),'radarChart' => $radarChart->build($client)]);
+                $enquiries = ClientEnquiry::where('client_id', $client->id)
+                                      ->orderBy('created_at', 'desc')
+                                      ->take(3)
+                                      ->get();
+                return view('users.clientOverview', [
+                    'performanceProfileTemplate' => $performanceProfileTemplate,
+                    'client' => $client, 
+                    'chart' => $linechart->build($client),
+                    'radarChart' => $radarChart->build($client),
+                    'enquiries' => $enquiries,
+                ]);
         } else {
             return redirect()->route('dashboard');
         }

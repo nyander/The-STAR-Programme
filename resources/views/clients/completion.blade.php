@@ -106,7 +106,7 @@
                 <div class="rounded mb-4">
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
                         <!-- Progress Review -->
-                        <x-input-label :value="__('Did the client achieve their initial Message Board goals?')" />
+                        <x-input-label :value="__('Did the client achieve their initial Enuquiry board goals?')" />
                         <textarea id="practitioner_client_achieve" name="practitioner_client_achieve"
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             required>{{ old('practitioner_client_achieve') }}</textarea>
