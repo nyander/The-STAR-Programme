@@ -61,21 +61,82 @@
         </div>
 
     </div>
+    
 
-    <div class="p-8 hidden bg-gray-200 lg:flex items-center ">
-      
-      <div class="max-w-md">
-      
-        <h2 class="text-2xl font-bold mb-4">Client Testimonials</h2>
-      
-        <blockquote class="italic text-gray-700">
-          "Working with Company XYZ was an amazing experience!"
-        </blockquote>
-      
+    <div class="hidden bg-gray-200 lg:flex items-center ">
+      <div class="relative overflow-hidden w-full h-full bg-red-50">
+        <div class="carousel h-full">
+         
+          <div class="carousel-slide h-full p-14 text-white flex flex-col justify-end" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(20,64,103,1) 0%, rgba(0,212,255,0) 100%), url('{{ asset('storage/images/Cemal_Testimony.png') }}'); background-size: cover;">
+            <div class="testimonial-content">
+              <p class="testimonial-description mb-4 text-lg">"Rifat has been a game-changer. I would sometimes struggle with self-talk which affected how I played. But Rifat's support has helped me a lot. I stay more focused and even play better in high-pressure matches. My performances improved massively. I would highly recommend Star Mentality to any athlete"</p>
+              <div class="testimonial-information flex justify-between">
+                <div class="left">
+                  <p><span class="font-bold">Client:</span> Cemal</p>
+                  <p>Goalkeeper</p>
+                </div>
+                <div class="right">
+                  <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                  </div>
+                </div>
+                <style>
+                    .star-rating {
+                        margin-top: 10px;
+                    }
+            
+                    .star {
+                        font-size: 24px;
+                        color: gold; /* Adjust the color as needed */
+                    }
+                </style>
+              </div>
+            </div>
+          </div>
+        
+          
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <button class="carousel-prev absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded-full" onclick="prevSlide()">
+          <
+        </button>
+        <button class="carousel-next absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded-full" onclick="nextSlide()">
+          >
+        </button>
       </div>
-
+      
     </div>
 
   </div>
+
+  <script>
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
+  
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(${100 * (i - index)}%)`;
+      });
+    }
+  
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+  
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+  
+    // Show the initial slide (optional)
+    showSlide(currentSlide);
+  </script>
+  
 
 @endsection
