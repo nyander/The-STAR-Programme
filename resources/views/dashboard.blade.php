@@ -86,7 +86,7 @@
                                   {{ $enquiries->count() }}
                               @endif
                             </h3>
-                            <p class="text-sm mt-2">Enuquiry board Topics</p>
+                            <p class="text-sm mt-2">Message board Topics</p>
                         </div>
                     </div>
                   
@@ -95,7 +95,7 @@
 
             <div class="p-4 sm:col-span-12 md:col-span-6 lg:col-span-5 bg-white h-full my-auto drop-shadow-md rounded">
               <div class="flex justify-between items-center">
-                <h3 class="text-lg font-bold">Enuquiry board</h3>
+                <h3 class="text-lg font-bold">Message board</h3>
                 <h3 class="text-xs">{{ $enquiriesCount }} Enquiries</h3>
               </div>
               @forelse ($enquiries as $enquiry)
