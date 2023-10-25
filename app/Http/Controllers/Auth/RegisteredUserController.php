@@ -101,11 +101,11 @@ class RegisteredUserController extends Controller
                 'performanceProfile_id' => $request->performance_profile_template,
                 'current_sport' => $request->current_sport,
                 'experience_level' => $request->experience_level,
-                'previous_achievements' => $request->previous_achievements,
-                'athletic_background' => $request->athletic_background,
-                'injuries' => $request->injuries,
-                'medical_conditions' => $request->medical_conditions,
-                'allergies' => $request->allergies,
+                // 'previous_achievements' => $request->previous_achievements,
+                // 'athletic_background' => $request->athletic_background,
+                // 'injuries' => $request->injuries,
+                // 'medical_conditions' => $request->medical_conditions,
+                // 'allergies' => $request->allergies,
             ]);
 
             $clientAgreement = ClientAgreement::create([

@@ -200,7 +200,7 @@
                     </div>
                     
 
-                    {{-- Athletic Background --}}
+                    {{-- Athletic Background
                     <div class="mt-4">
                         <x-input-label for="athletic_background" :value="__('Athletic Background')" />
                         <textarea id="athletic_background" name="athletic_background"
@@ -208,11 +208,11 @@
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         >{{ old('athletic_background') }}</textarea>
                         <x-input-error :messages="$errors->get('athletic_background')" class="mt-2" />
-                    </div>
+                    </div> --}}
                     
                 </div>
 
-                <div class="consentandAgreement-background p-6 bg-white rounded shadow mb-4">
+                {{-- <div class="consentandAgreement-background p-6 bg-white rounded shadow mb-4">
                     <div class="mt-4">
                         <x-input-label for="consent" :value="__('Consent')" />
                         <div class="flex items-center">
@@ -240,7 +240,7 @@
                         </div>
                         <x-input-error :messages="$errors->get('confidentiality')" class="mt-2" />
                     </div>
-                </div>
+                </div> --}}
                 
             </div>
 

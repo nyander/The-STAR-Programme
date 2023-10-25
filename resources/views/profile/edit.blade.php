@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            @if (Auth::user()->hasRole('Admin'))
+            {{-- @if (Auth::user()->hasRole('Admin'))
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">  
                     <div>
                         <h2 class="text-lg font-medium text-gray-900">
@@ -43,7 +43,7 @@
                     </div>
 
                 </div>
-            @endif
+            @endif --}}
             
         </div>
     </div>
