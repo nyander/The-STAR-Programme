@@ -36,6 +36,7 @@ class DashboardController extends Controller
         $totalIncompletePerformanceProfiles = PerformanceProfile::where('completed', false)->count();
         $totalGoals = ClientGoal::all()->count();
         $recentSubmissions = ClientGoal::orderBy('created_at', 'desc')->limit(5)->get();
+        
 
         return view('dashboard', ['recentSubmissions' => $recentSubmissions,'user' => $user,'totalIncompletePerformanceProfiles' => $totalIncompletePerformanceProfiles,'totalGoals' => $totalGoals,'totalPerformanceProfiles' => $totalPerformanceProfiles,'chart' => $linechart->build($user),'radarChart' => $radarChart->build($user), 'enquiries' => $recentEnquiries, 'enquiriesCount' => $enquiriesCount]);
     }

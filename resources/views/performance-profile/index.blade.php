@@ -35,7 +35,13 @@
                                 <h2 class="text-xl font-semibold mb-4">Program Complete</h2>
                                 <p class="text-gray-600 mb-6">You have now reached the end of your agreed contract for the S.T.A.R Program. You are now at the final stage of the program. Please click on the button below.</p>
                                 <a href="{{ route('client.completion', $clientAgreement->user_id) }}" class="bg-gray-800 text-white px-4 py-2 rounded-md">Complete Program</a>
-                            </div>                
+                            </div>
+                        @elseif ($user->clientOverview->client_completion == true)
+                            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                                <h2 class="text-xl font-semibold mb-4">Program Complete</h2>
+                                <p class="text-gray-600 mb-6">You have completed your program.If you would like to download your program, please click the button below</p>
+                                <a href="{{ route('getFullSummary', $user) }}" class="bg-gray-800 text-white px-4 py-2 rounded-md">Download</a>
+                            </div>                    
                         @endif
                     @endif
                     

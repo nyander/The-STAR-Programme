@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\PerformanceProfileChart;
+use App\Charts\PerformanceProfileRadarChart;
 use Illuminate\Http\Request;
 use App\Models\ClientOverview;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostProgramController extends Controller
@@ -17,10 +20,20 @@ class PostProgramController extends Controller
      */
     public function index()
     {
-        $postFeedbacks = ClientOverview::where('client_completion', true)->get();
+        if(Auth::user()->hasRole('Admin')){
+            $postFeedbacks = ClientOverview::where('client_completion', true)->get();
+        } else {
+            $postFeedbacks = ClientOverview::where([
+                ['client_completion','=',true],
+                ['user_id', '=', Auth::user()->id],
+                ])->get();
+        }
+        
 
         return view('post-feedback.index',  compact('postFeedbacks'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -50,6 +63,26 @@ class PostProgramController extends Controller
             }
         }
         
+        
+    }
+
+
+    public function getFullSummary(User $client, PerformanceProfileChart $linechart, PerformanceProfileRadarChart $radarChart)
+    {
+        if($client->id == Auth::user()->id || Auth::user()->hasRole('Admin')) {
+            if($client->hasRole('Client')){
+                $performanceProfiles = $client->performanceProfile()->get();
+                $feedback = $client->clientOverview()->first();
+                return view('summaries.fullSummary',  [
+                    'performanceProfiles' => $performanceProfiles, 
+                    'feedback' => $feedback,
+                    'chart' => $linechart->build($client),
+                    'radarChart' => $radarChart->build($client)]
+                );
+            } else {
+                return redirect()->back()->with('error', 'The selected user is not a client');
+            }
+        }
         
     }
 

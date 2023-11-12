@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ClientEnquiryController;
 use App\Http\Controllers\ClientGoalController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PerformanceCategoryController;
 use App\Http\Controllers\PerformanceProfileController;
 use App\Http\Controllers\PerformanceProfileTemplateController;
@@ -37,6 +39,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::resource('performance-profile-templates', PerformanceProfileTemplateController::class)->middleware(['auth', 'verified']);
 Route::resource('feedbacks', PostProgramController::class)->middleware(['auth', 'verified']);
+Route::get('feedbacks/summary/{client}', [PostProgramController::class, 'getFullSummary'])->middleware(['auth', 'verified'])->name('getFullSummary');
 
 // Goals
 Route::get('goals/{client}', [ClientGoalController::class, 'index'])->middleware(['auth', 'verified'])->name('goals.index');
@@ -101,6 +104,10 @@ Route::get('/files/{id}', [FileController::class, 'show'])->name('files.show');
 // routes/web.php
 
 Route::get('/404', [ErrorController::class, 'notFound'])->name('notFound');
+
+Route::get('create-pdf/{client}', [PDFController::class, 'index'])
+    ->name('create-pdf')
+    ->middleware(['auth', 'verified']);
 
 
 Route::middleware(['auth'])->group(function () {
