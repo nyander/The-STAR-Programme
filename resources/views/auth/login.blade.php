@@ -68,7 +68,7 @@
         <div class="carousel h-full">
          
           {{-- Slide 1 --}}
-          <div class="carousel-slide h-full p-14 text-white flex flex-col justify-end" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(20,64,103,1) 0%, rgba(0,212,255,0) 100%), url('{{ asset('storage/images/Cemal_Testimony.png') }}'); background-size: cover;">
+          <div class="carousel-slide h-full p-14 text-white flex flex-col justify-end" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(20,64,103,1) 0%, rgba(0,212,255,0) 60%), url('{{ asset('storage/images/Cemal_Testimony.png') }}'); background-size: cover;">
             <div class="testimonial-content">
               <p class="testimonial-description mb-4 text-lg">"Rifat has been a game-changer. I would sometimes struggle with self-talk which affected how I played. But Rifat's support has helped me a lot. I stay more focused and even play better in high-pressure matches. My performances improved massively. I would highly recommend Star Mentality to any athlete"</p>
               <div class="testimonial-information flex justify-between">
@@ -99,18 +99,16 @@
             </div>
           </div>
 
-          {{-- Slide 2 --}}
-          <div class="carousel-slide h-full p-14 text-white flex flex-col justify-end" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(20,64,103,1) 0%, rgba(0,212,255,0) 100%), url('{{ asset('storage/images/Cemal_Testimony.png') }}'); background-size: cover;">
+          <div class="carousel-slide h-full p-14 text-white flex flex-col justify-end" style="background: linear-gradient(0deg, rgb(2, 0, 36) 0%, rgba(20,64,103,1) 0%, rgba(0,212,255,0) 40%), url('{{ asset('storage/images/Jurgen_Testimony.png') }}'); background-size: cover;">
             <div class="testimonial-content">
-              <p class="testimonial-description mb-4 text-lg">"Rifat has been a game-changer. I would sometimes struggle with self-talk which affected how I played. But Rifat's support has helped me a lot. I stay more focused and even play better in high-pressure matches. My performances improved massively. I would highly recommend Star Mentality to any athlete"</p>
+              <p class="testimonial-description mb-4 text-lg">Without a doubt, getting over injury isn’t easy but working with Rifat helped me a lot. The work we did together was insightful and valuable. He helped me get back on the court and back to playing at my best</p>
               <div class="testimonial-information flex justify-between">
                 <div class="left">
-                  <p><span class="font-bold">Client:</span> Cemal</p>
-                  <p>Goalkeeper</p>
+                  <p><span class="font-bold">Client:</span> Jurgen</p>
+                  <p>Basketballer</p>
                 </div>
                 <div class="right">
                   <div class="star-rating">
-                    <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
                     <span class="star">&#9733;</span>
@@ -130,7 +128,6 @@
               </div>
             </div>
           </div>
-        
           
         </div>
         
@@ -148,13 +145,12 @@
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.carousel-slide');
     let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
   
     function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${100 * (i - index)}%)`;
-      });
+      slides.forEach(slide => slide.style.display = 'none');
+      slides[index].style.display = 'flex';
     }
   
     function nextSlide() {
@@ -167,7 +163,7 @@
       showSlide(currentSlide);
     }
   
-    // Show the initial slide (optional)
+    // Initialize the first slide to be visible
     showSlide(currentSlide);
   </script>
   

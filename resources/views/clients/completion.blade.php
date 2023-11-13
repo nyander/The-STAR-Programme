@@ -114,7 +114,7 @@
                     </div>
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
                         <!-- Progress Review -->
-                        <x-input-label :value="__('How do you assess the client\'s progress throughout the program?')" />
+                        <x-input-label :value="__('How did the client’s mindset evolve throughout the program?')" />
                         <textarea id="practitioner_progress_review" name="practitioner_progress_review"
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             required>{{ old('practitioner_progress_review') }}</textarea>
@@ -123,7 +123,7 @@
 
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
                         <!-- Achievement Review -->
-                        <x-input-label :value="__('What specific strategies or techniques were most effective for the client?')" />
+                        <x-input-label :value="__('What strategies were most effective for the client?')" />
                         <textarea id="practitioner_achievement_review" name="practitioner_achievement_review"
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             required>{{ old('practitioner_achievement_review') }}</textarea>
@@ -150,7 +150,7 @@
 
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
                         <!-- Mindset Review -->
-                        <x-input-label :value="__('How can I continue to support the client after the program’s conclusion?')" />
+                        <x-input-label :value="__('How can I continue to support the client after the program?')" />
                         <textarea id="practitioner_support" name="practitioner_support"
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             required>{{ old('practitioner_support') }}</textarea>

@@ -57,7 +57,7 @@ class PerformanceProfileRadarChart
         $radarChart = $this->chart->radarChart()
             ->setTitle('Average Answers Per Session.')
             ->setXAxis($categories)
-            ->setMarkers(['#303F9F'], 7, 10);
+            ->setMarkers(['#303F9F'], 3, 5);
 
             
 

@@ -93,14 +93,14 @@
                     </div>
 
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
-                        <label for="">How do you assess the client's progress throughout the program?</label>
+                        <label for="">How did the client’s mindset evolve throughout the program?</label>
                         <textarea name="practitioner_progress_review" id="practitioner_progress_review" 
                         class="block mt-1 w-full rounded-md  p-2 border-gray-300 bg-gray-50"
                         disabled>{{ $feedback->practitioner_progress_review }}</textarea>
                     </div>
 
                     <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
-                        <label for="">What specific strategies or techniques were most effective for the client?</label>
+                        <label for="">What strategies were most effective for the client?</label>
                         <textarea name="practitioner_achievement_review" id="practitioner_achievement_review" 
                         class="block mt-1 w-full rounded-md  p-2 border-gray-300 bg-gray-50"
                         disabled>{{ $feedback->practitioner_achievement_review }}</textarea>
@@ -118,6 +118,13 @@
                         <textarea name="practitioner_suggestion" id="practitioner_suggestion" 
                         class="block mt-1 w-full rounded-md  p-2 border-gray-300 bg-gray-50"
                         disabled>{{ $feedback->practitioner_suggestion }}</textarea>
+                    </div>
+
+                    <div class="mt-4 border-primary border-4 p-4 bg-white rounded-md">
+                        <label for="">How can I continue to support the client after the program?</label>
+                        <textarea name="practitioner_support" id="practitioner_support" 
+                        class="block mt-1 w-full rounded-md  p-2 border-gray-300 bg-gray-50"
+                        disabled>{{ $feedback->practitioner_support }}</textarea>
                     </div>
                 </div>
             @endif
