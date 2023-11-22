@@ -23,7 +23,7 @@
                         <div>
                             <h3 class="text-lg font-semibold mb-0">{{ $client->name }}</h3>
                             <p class="mb-1 text-xs"><span class="font-semibold">Last Submitted Profile:</span></p>
-                            <p class="mb-1 text-xs"><span class="font-semibold">Goals Achieved:</span> {{ $count = $client->clientGoals()->where('complete', true)->count(); }}</p>    
+                            <p class="mb-1 text-xs"><span class="font-semibold">Goals Achieved:</span> {{ $count = $client->clientGoals()->where('complete', true)->count() }}</p>    
                         </div>
                         <div>
                             
