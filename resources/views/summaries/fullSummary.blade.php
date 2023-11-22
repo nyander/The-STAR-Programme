@@ -29,7 +29,7 @@
 
     </head>
     <body>
-        <div class="mt-6 rounded-lg mx-8 bg-white p-8 mx-auto main-content-to-download" style="max-width: 1080px">
+        <div class="mt-6 rounded-lg mx-8 bg-white p-8 main-content-to-download" style="max-width: 1080px">
 
             <button id="save-as-pdf" class="bg-blue-500 text-white px-4 py-2 rounded">
                 Save
