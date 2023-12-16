@@ -26,7 +26,7 @@
                 <div class="text-section relative mb-4">
                     <div class="flex items-center justify-between mb-4">
                         <div class="label">
-                            <h3 class="text-base">Hello This is a test</h3>
+                            <h3 class="text-base">Select Client</h3>
                         </div>
                     </div>
                     <div class="field">
