@@ -15,8 +15,8 @@
         @endif
           
 
-        <div class="flex">
-            <div class="w-7/12 pr-4 p-8">
+        <div class="md:flex">
+            <div class="md:w-7/12 p-4 md:pr-4 md:p-8">
                 <div class="mb-4">
                     @if (Auth::user()->hasRole('Admin'))
                         <form method="POST" action="{{ route('performance-profiles.search') }}">
@@ -88,64 +88,68 @@
                 </div>
             </div>
 
-            <div class="w-5/12 bg-sky-50 pl-4 p-4 m-4 border-l-8 border-yellow-300 rounded">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-semibold mb-0">Goals</h2>
-                    @if (Auth::user()->hasRole('Admin'))
-                        <a href="{{ route('goals.create', $user) }}" class="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 rounded text-base">Add New Goal</a>
-                    @endif
-                </div> 
+            <div class="md:w-5/12 pb-4">
+                <div class="bg-sky-50 p-4 m-4 border-l-8 border-yellow-300 rounded">
 
-                <div>
-                    @forelse ($clientGoals as $goal)
-                        <div class="p-6 flex space-x-2 my-4 border-l-4 border-primary rounded bg-white">
-                            <div class="flex-1">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <h1 class="font-semibold">{{ $goal->description }}</h1>
-                                        <h2 class="text-sm">Target: {{ $goal->goal }}</h2>
-                                        @if ($goal->type == 'amount')
-                                            <h2 class="text-sm">Progress: {{ $goal->achieved }}/{{ $goal->goal }}</h2>
-                                        @endif
+                
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-semibold mb-0">Goals</h2>
+                        @if (Auth::user()->hasRole('Admin'))
+                            <a href="{{ route('goals.create', $user) }}" class="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 rounded text-base">Add New Goal</a>
+                        @endif
+                    </div> 
+
+                    <div>
+                        @forelse ($clientGoals as $goal)
+                            <div class="p-6 flex space-x-2 my-4 border-l-4 border-primary rounded bg-white">
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h1 class="font-semibold">{{ $goal->description }}</h1>
+                                            <h2 class="text-sm">Target: {{ $goal->goal }}</h2>
+                                            @if ($goal->type == 'amount')
+                                                <h2 class="text-sm">Progress: {{ $goal->achieved }}/{{ $goal->goal }}</h2>
+                                            @endif
+                                            
+                                            <h2 class="text-sm font-bold {{ $goal->complete == false ? 'text-red-600' : 'text-green-600' }} ">{{ $goal->complete == false ? 'Incomplete' : 'Complete' }}</h2>
+                                            @if ($goal->complete == false && Auth::user()->id == $goal->client->id)
+                                                <div class="mt-4">
+                                                    <a href="{{ route('goals.updateGoal', $goal) }}" class="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 rounded text-base">Update</a>
+                                                </div>
+                                            @endif
                                         
-                                        <h2 class="text-sm font-bold {{ $goal->complete == false ? 'text-red-600' : 'text-green-600' }} ">{{ $goal->complete == false ? 'Incomplete' : 'Complete' }}</h2>
-                                        @if ($goal->complete == false && Auth::user()->id == $goal->client->id)
-                                            <div class="mt-4">
-                                                <a href="{{ route('goals.updateGoal', $goal) }}" class="bg-primary hover:bg-primary text-white font-semibold py-2 px-4 rounded text-base">Update</a>
-                                            </div>
-                                        @endif
-                                    
-                                    </div>
-                                    @if (Auth::user()->hasRole('Admin'))
-                                    <x-dropdown>
-                                        <x-slot name="trigger">
-                                            <button>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                </svg>
-                                            </button>
-                                        </x-slot>
-                                        <x-slot name="content">
-                                            <x-dropdown-link :href="route('goals.edit', $goal)">
-                                                {{ __('Edit') }}
-                                            </x-dropdown-link>
-
-                                            <form method="POST" action="{{ route('goals.destroy', $goal) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <x-dropdown-link :href="route('goals.destroy', $goal)" onclick="event.preventDefault(); this.closest('form').submit();">
-                                                    {{ __('Delete') }}
+                                        </div>
+                                        @if (Auth::user()->hasRole('Admin'))
+                                        <x-dropdown>
+                                            <x-slot name="trigger">
+                                                <button>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                    </svg>
+                                                </button>
+                                            </x-slot>
+                                            <x-slot name="content">
+                                                <x-dropdown-link :href="route('goals.edit', $goal)">
+                                                    {{ __('Edit') }}
                                                 </x-dropdown-link>
-                                            </form>
-                                        </x-slot>
-                                    </x-dropdown>
-                                @endif
+
+                                                <form method="POST" action="{{ route('goals.destroy', $goal) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <x-dropdown-link :href="route('goals.destroy', $goal)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        {{ __('Delete') }}
+                                                    </x-dropdown-link>
+                                                </form>
+                                            </x-slot>
+                                        </x-dropdown>
+                                    @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        <p>No Goals Set</p>
-                    @endforelse
+                        @empty
+                            <p>No Goals Set</p>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>

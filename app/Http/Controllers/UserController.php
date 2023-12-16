@@ -161,6 +161,7 @@ class UserController extends Controller
     }
 
     public function clientOverview(User $client, PerformanceProfileChart $linechart, PerformanceProfileRadarChart $radarChart) {
+       
         if (Auth::user()->hasRole('Admin')) {
             $performanceProfileTemplate = PerformanceProfileTemplate::all();
             $user = auth()->user();
@@ -169,7 +170,6 @@ class UserController extends Controller
                                       ->orderBy('created_at', 'desc')
                                       ->take(3)
                                       ->get();
-        
             return view('users.clientOverview', [
                 'performanceProfileTemplate' => $performanceProfileTemplate,
                 'client' => $client, 
@@ -178,20 +178,19 @@ class UserController extends Controller
                 'enquiries' => $enquiries,
             ]);
         } else if (Auth::user()->hasRole('Client')) {
-                $performanceProfileTemplate = PerformanceProfileTemplate::all();
-                $client = User::where('id', Auth::user()->id)->first();
-                $enquiries = ClientEnquiry::where('client_id', $client->id)
-                                      ->orderBy('created_at', 'desc')
-                                      ->take(3)
-                                      ->get();
-                return view('users.clientOverview', [
-                    'performanceProfileTemplate' => $performanceProfileTemplate,
-                    'client' => $client, 
-                    'chart' => $linechart->build($client),
-                    'radarChart' => $radarChart->build($client),
-                    'enquiries' => $enquiries,
-                ]);
-        } else {
+            $performanceProfileTemplate = PerformanceProfileTemplate::all();
+            $enquiries = ClientEnquiry::where('client_id', Auth::user()->id)
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
+            return view('users.clientOverview', [
+                'performanceProfileTemplate' => $performanceProfileTemplate,
+                'client' => Auth::user(), // Use Auth::user() here
+                'chart' => $linechart->build(Auth::user()), // Use Auth::user() here
+                'radarChart' => $radarChart->build(Auth::user()), // Use Auth::user() here
+                'enquiries' => $enquiries,
+            ]);
+        }     else {
             return redirect()->route('dashboard');
         }
     }

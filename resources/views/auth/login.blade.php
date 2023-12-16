@@ -7,7 +7,7 @@
 
   <div class="grid lg:grid-cols-2 h-screen mx-8 py-4">
 
-    <div class="p-8 flex items-center justify-center">
+    <div class="md:p-8 flex items-center justify-center">
         <div class="w-10/12">
 
             <h1 class="text-primary text-2xl font-bold mb-2">Welcome Back</h1>
@@ -15,7 +15,7 @@
             <p class="text-black text-base">Please enter your details to sign in.</p>
 
             {{-- form --}}
-            <form method="POST" action="{{ route('login') }}" class="w-full max-w-md mt-4">
+            <form method="POST" action="{{ route('login') }}" class="w-full md:max-w-md mt-4">
 
                 @csrf
 

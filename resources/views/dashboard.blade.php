@@ -25,7 +25,7 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
       
-      <div class="p-12 text-gray-900">
+      <div class="p-6 md:p-12 text-gray-900">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-6">  
           {{ __('Dashboard') }}
         </h2>
@@ -170,10 +170,10 @@
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link>
-                                  <button class="tab  font-bold w-full text-left rounded-l" onclick="openTab('chart')">Chart</button>
+                                  <button class="tab  font-bold w-full text-right rounded-l" onclick="openTab('chart')">Chart</button>
                                 </x-dropdown-link>
                                 <x-dropdown-link>
-                                  <button class="tab  font-bold w-full text-left rounded-r" onclick="openTab('radar')">Radar Chart</button>
+                                  <button class="tab  font-bold w-full text-right rounded-r" onclick="openTab('radar')">Radar Chart</button>
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

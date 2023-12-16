@@ -30,9 +30,9 @@
                     </div>
                 </div>
             </div>
-            <div class="p-8 bg-gray-200 mx-2">
+            <div class="p-4 md:p-8 bg-gray-200 mx-2">
                 <h4 class="font-semibold mb-8 text-lg">Overview</h4>
-                <div class="grid grid-cols-2 gap-2" style="grid-template-columns: 70% 30%;">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div class="performance-chart chart tabcontent bg-white p-4">
                         {!! $chart->container() !!}
                         <script src="{{ $chart->cdn() }}"></script>
@@ -51,7 +51,7 @@
                 </div>
 
 
-                <div class="grid grid-cols-2 gap-2 mt-4" style="grid-template-columns: 40% 60%;">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
                     <div>
                         <div class="col-span-4 bg-gray-200">
                             <div class="grid grid-cols-2 grid-rows-2 gap-2">
@@ -224,8 +224,8 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="grid grid-cols-2 gap-2 bg-white bg-gray-300 p-6" style="grid-template-columns: 40% 60%;">
-                            <div class="bg-gray-100 p-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:bg-white bg-gray-300 md:p-6">
+                            <div class=" bg-gray-300 placeholder:md:bg-gray-100 p-4">
                                 <h2 class="font-semibold mb-4">Availability & Session Preferences</h2>
                                 
                                 <div>
@@ -265,9 +265,9 @@
     
                                 
                             </div>
-                            <div class="bg-gray-100 p-4">
+                            <div class="bg-gray-300 md:bg-gray-100 p-4">
                                 <h2 class="font-semibold mb-4">Availability & Session Preferences</h2>
-                                <div class="grid grid-cols-2 gap-y-4 gap-x-2">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-2">
                                     <!-- Name -->
                                     <div>
                                         <x-input-label for="name" :value="__('Name')" />

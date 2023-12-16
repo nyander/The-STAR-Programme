@@ -1,7 +1,7 @@
 @extends('layouts.standard')
 
 @section('content')
-    <div class="mt-6 rounded-lg  mx-8 bg-white p-8">
+    <div class="mt-6 rounded-lg  mx-8 bg-white md:p-8">
         @if(session('success'))
     <div class="p-6 bg-green-100 rounded shadow mb-4 success">
         <p class="text-green-600">{{ session('success') }}</p>
@@ -13,7 +13,7 @@
         <p class="text-red-600">{{ session('error') }}</p>
     </div>
   @endif   
-        <div class="bg-gray-100 p-16 px-12">
+        <div class="bg-gray-100  p-6 md:p-16 md:px-12">
             <h2 class="text-2xl font-black mb-4">Consultation</h2>
             <div class="grid lg:grid-cols-2 mb-8">
                 <p>

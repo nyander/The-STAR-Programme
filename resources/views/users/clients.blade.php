@@ -68,8 +68,8 @@
                     
                 </div>
                     
-                <div id="content{{ $loop->iteration }}" class="hidden p-8 bg-gray-200 mx-2">
-                    <div class="grid grid-cols-3 gap-4">
+                <div id="content{{ $loop->iteration }}" class="hidden p-8 bg-gray-200 md:mx-2">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         @foreach ($client->performanceProfile as $performanceProfile) 
                             <div class="p-6 bg-white rounded shadow mb-4 flex justify-between">
                                 <a href="{{ route('performance-profiles.show', $performanceProfile) }}">

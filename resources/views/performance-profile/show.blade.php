@@ -1,7 +1,7 @@
 @extends('layouts.standard')
 
 @section('content')
-    <div class="mt-6 rounded-lg  mx-8 bg-white p-8">
+    <div class="mt-6 rounded-lg  mx-8 bg-white md:p-8">
         @if(session('success'))
     <div class="p-6 bg-green-100 rounded shadow mb-4">
         <p class="text-green-600">{{ session('success') }}</p>
@@ -14,7 +14,7 @@
     </div>
   @endif   
 
-        <div class=" bg-gray-100 p-10">
+        <div class=" bg-gray-100 p-4 md:p-10">
             <h2 class="text-2xl font-semibold mb-4">Performance Profile: {{ $performanceProfile->performanceProfileTemplate->title }}</h2>
 
             <div class="mb-6">
@@ -141,7 +141,7 @@
                 <div class="mx-auto mt-10">
                     <form method="POST" action="{{ route('performance-profiles.addFeedback', $performanceProfile) }}" class="mt-4">
                         @csrf
-                        <div class="text-section mb-4 relative p-8 bg-grey-100 border-t-4 border-primary">
+                        <div class="text-section mb-4 relative md:p-8 bg-grey-100 border-t-4 border-primary">
                             <div class="flex items-center justify-between">
                                 <div class="label">
                                     <h3 class="text-2xl font-semibold">Practitioner's feedback</h3>
@@ -149,7 +149,7 @@
                             </div>
                             
 
-                            <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-8">
                                 <div class="field">
                                     <div class="border-green-600 border-4 p-4 bg-white rounded-md mt-8">
                                         <label for="strengths">Main Strengths</label>

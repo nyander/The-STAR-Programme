@@ -193,12 +193,6 @@
                     {{ __('Login') }}
                 </x-responsive-nav-link>
             @endif
-
-            @if (Route::has('register'))
-                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                    {{ __('Register') }}
-                </x-responsive-nav-link>
-            @endif
         @else
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -242,9 +236,9 @@
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
-                    @can('client-overview-access')
+                    @can('enroll-client')
                         <x-responsive-nav-link :href="route('client.create')">
-                            {{ __('Enroll Client') }}
+                            {{ __('Enroll Clientss') }}
                         </x-responsive-nav-link>
                     @endcan
                     

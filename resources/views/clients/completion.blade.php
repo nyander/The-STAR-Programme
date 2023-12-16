@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="mt-6 rounded-lg  mx-8 bg-white p-8">
+    <div class="mt-6 rounded-lg  mx-8 bg-white md:p-8">
         @if(session('success'))
             <div class="p-6 bg-green-100 rounded shadow mb-4">
                 <p class="text-green-600">{{ session('success') }}</p>
@@ -13,7 +13,7 @@
         @endif   
 
         @if (Auth::user()->hasRole('Client'))
-            <form method="POST" action="{{ route('client.storeCompletion', $client) }}" class="bg-gray-100 p-16 px-32">
+            <form method="POST" action="{{ route('client.storeCompletion', $client) }}" class="bg-gray-100 p-4 md:p-16 md:px-32">
                 @csrf
                 @method('put')
                 <!-- Client Feedback -->
@@ -30,7 +30,7 @@
                         <x-input-error :messages="$errors->get('client_experience')" class="mt-2" />
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-4">
                         <div class="mt-4 border-green-600 border-4 p-4 bg-white rounded-md">
                             <!-- What Went Well -->
                             <x-input-label :value="__('What aspects of the program went well?')" />

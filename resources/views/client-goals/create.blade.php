@@ -22,6 +22,29 @@
           @csrf
           <input type="text" name="client_id" value="{{ $client->id }}" hidden>
 
+            @if (Auth::user()->hasRole('Admin'))
+                <div class="text-section relative mb-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="label">
+                            <h3 class="text-base">Hello This is a test</h3>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="relative">
+                            <select name="selectClient" id="selectClient" class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                
+                                <option value="">Select Client</option>
+                                @foreach ($clients as $client)
+                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+
+
           {{-- Description --}}
           <div class="text-section mb-4 relative">
               <div class="flex items-center justify-between mb-4">

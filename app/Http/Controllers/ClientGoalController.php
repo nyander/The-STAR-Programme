@@ -46,7 +46,11 @@ class ClientGoalController extends Controller
     public function create(User $client)
     {
         if (Auth::user()->hasRole('Admin')) {
-            return view('client-goals.create', compact('client'));
+            $clients = User::whereHas('roles', function ($query) {
+                $query->where('name', 'Client');
+            })->get();
+
+            return view('client-goals.create', compact('client','clients'));
         } else {
             return redirect()->back()->with('error', 'Only a Client can create goals');
         }
@@ -57,41 +61,31 @@ class ClientGoalController extends Controller
      */
     public function store(Request $request, User $client)
     {
-        $validated = $request->validate([
+        $validationRules = [
             'description' => 'required|string|max:255',
             'type' => 'required',
-            'client_id' => 'required'
-        ]);
+            'client_id' => 'required',
+        ];
 
-        if ($validated['type'] === 'amount') {
-            $validated = $request->validate([
-                'description' => 'required|string|max:255',
-                'type' => 'required',
-                'amount_goal' => 'required|numeric',
-                'client_id' => 'required'
-            ]);
-
-            $goalData = [
-                'description' => $validated['description'],
-                'type' => $validated['type'],
-                'goal' => $validated['amount_goal'],
-                'client_id' => $validated['client_id'],
-            ];
-        } else {
-            $validated = $request->validate([
-                'description' => 'required|string|max:255',
-                'type' => 'required',
-                'milestone_goal' => 'required|string',
-                'client_id' => 'required'
-            ]);
-
-            $goalData = [
-                'description' => $validated['description'],
-                'type' => $validated['type'],
-                'goal' => $validated['milestone_goal'],
-                'client_id' => $validated['client_id'],
-            ];
+        // If the user is an admin and 'type' is 'amount', add the 'selectClient' rule
+        if (Auth::user()->hasRole('Admin') && $request->input('type') === 'amount') {
+            $validationRules['selectClient'] = 'required';
         }
+
+        if ($request->input('type') === 'amount') {
+            $validationRules['amount_goal'] = 'required|numeric';
+        } else {
+            $validationRules['milestone_goal'] = 'required|string';
+        }
+
+        $validated = $request->validate($validationRules);
+
+        $goalData = [
+            'description' => $validated['description'],
+            'type' => $validated['type'],
+            'goal' => $validated['type'] === 'amount' ? $validated['amount_goal'] : $validated['milestone_goal'],
+            'client_id' => Auth::user()->hasRole('Admin') ? $validated['selectClient'] : $validated['client_id'],
+        ];
 
         $practitioner = User::find(Auth::user()->id);
 
@@ -101,9 +95,9 @@ class ClientGoalController extends Controller
         $client->notify(new GoalSubmitted($clientGoal, $practitioner));
 
         return redirect()->route('performance-profiles.index')
-                            ->with('success','New Goal has been added');
-        
+            ->with('success', 'New Goal has been added');
     }
+
 
 
     /**
