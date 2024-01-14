@@ -39,15 +39,18 @@
             <div class="sm:col-span-12 md:col-span-6 lg:col-span-4">
                 <div class="grid grid-cols-2 grid-rows-2 gap-2 bg-white h-full p-4 drop-shadow-md">
 
+                  <a href="{{ route('performance-profiles.index') }}"> 
                     <div class="bg-red-600 p-4 flex items-center rounded drop-shadow-md h-full">
-                      <div class="text-white mx-auto text-center">
-                        <h3 class="title text-3xl md:text-4xl font-extrabold">
-                            {{ $totalIncompletePerformanceProfiles }}
-                        </h3>
-                        <p class="text-sm mt-2">Incomplete Performance Profiles</p>
+                        <div class="text-white mx-auto text-center">
+                          <h3 class="title text-3xl md:text-4xl font-extrabold">
+                              {{ $totalIncompletePerformanceProfiles }}
+                          </h3>
+                            <p class="text-sm mt-2">Submitted Performance Profiles</p>
+                        </div>
                       </div>
-                    </div>
+                  </a>
                   
+                  <a href="{{ route('performance-profiles.index') }}"> 
                     <div class="bg-green-700 p-4 flex items-center rounded drop-shadow-md h-full">
                         <div class="text-white mx-auto text-center">
                             <h3 class="title text-3xl md:text-4xl font-extrabold">
@@ -62,6 +65,7 @@
                             <p class="text-sm mt-2">Completed Performance Profiles</p>
                         </div>
                     </div>
+                  </a>
                   
                     <div class="bg-blue-900 p-4 flex items-center rounded drop-shadow-md	h-full">
                         <div class="text-white mx-auto text-center">

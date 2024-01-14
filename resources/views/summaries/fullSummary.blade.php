@@ -26,10 +26,9 @@
             }
             </style>
             
-
     </head>
     <body>
-        <div class="mt-6 rounded-lg mx-8 bg-white p-8 main-content-to-download" style="max-width: 1080px">
+        <div class="mt-6 rounded-lg md:mx-8 bg-white p-2 md:p-8 main-content-to-download" style="max-width: 1080px">
 
             <button id="save-as-pdf" class="bg-blue-500 text-white px-4 py-2 rounded">
                 Save
@@ -46,7 +45,7 @@
                 </div>
             @endif   
     
-            <div class="bg-gray-100 py-16 px-32 ">
+            <div class="bg-gray-100 py-16 px-12 md:px-32 ">
 
                 <h1 class="text-2xl font-semibold">Performance Profile Summary</h1>
 

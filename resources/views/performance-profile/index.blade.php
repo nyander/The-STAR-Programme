@@ -69,7 +69,7 @@
                                     @if (Auth::user()->hasRole('Admin'))
                                         <h2 class="text-sm mb-1"> <span class="font-semibold">Client: </span>{{ $performanceProfile->client->name }}</h2>
                                     @endif
-                                    <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ $performanceProfile->completed == false ? 'Incomplete' : 'Complete' }}</h2>
+                                    <h2 class="text-sm font-bold {{ $performanceProfile->completed == false ? 'text-red-600' : 'text-green-600' }} ">{{ Auth::user()->hasRole('Admin') ? $performanceProfile->completed == false ? 'Feedback Incomplete' : 'Feedback Complete' : ""}}</h2>
                                     
                                     @if ($performanceProfile->practitioner_feedback != null)
                                         <div class="mt-4">

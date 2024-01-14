@@ -15,9 +15,9 @@
   @endif   
         <div class="bg-gray-100  p-6 md:p-16 md:px-12">
             <h2 class="text-2xl font-black mb-4">Consultation</h2>
-            <div class="grid lg:grid-cols-2 mb-8">
+            <div class=" mb-8">
                 <p>
-                    Sorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.
+                    Welcome to the Message Board, a dedicated space for {{Auth::user()->hasRole("Client") ? "you" : "clients" }} to pose enquiries, share updates and seek guidance.
                 </p>
 
             </div>
