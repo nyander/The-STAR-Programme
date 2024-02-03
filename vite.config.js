@@ -18,5 +18,5 @@ export default defineConfig({
         https: false,
     },
 
-    base:'/build/',
+    base:'/',
 });
